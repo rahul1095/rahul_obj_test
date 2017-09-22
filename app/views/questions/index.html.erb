@@ -1,0 +1,38 @@
+
+ <% @setting=Setting.last %>
+
+<%if @setting.start_time < Time.now && @setting.end_time > Time.now||current_user %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.name %></td>
+        <td><%= link_to 'Show', question %></td>
+        <% if current_user.id==question.user.id%>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_question_path %>
+
+<%else%>
+ Time is over
+<%end%>

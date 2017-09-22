@@ -1,0 +1,2 @@
+class AddCategoryIdTest < ApplicationRecord
+end
