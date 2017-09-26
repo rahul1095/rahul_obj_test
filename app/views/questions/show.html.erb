@@ -1,22 +1,39 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+ <p id="demo"></p>    
+<script>
+var d1 = new Date ();
+var d2 = new Date ( d1 );
+var countDownDate =d2.setHours ( d1.getHours() + 1 );
 
+// Update the count down every 1 second
+var x = setInterval(function() {
 
-<% @question.end_time=Time.now+1.hours%>
+  // Get todays date and time
+  var now = new Date().getTime();
 
-<%@question.start_time=Time.now%>
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
 
-   <% distance = @question.end_time-@question.start_time%>
- 
-  
-   <%hours = distance/(60 * 60)%>
-   <%minutes = (distance / 60)%60%>
-   <%seconds = distance % 60%>
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
- <%=format("%02d", hours)%>H: <%=format("%02d", minutes)%>m:<%=format("%02d", seconds)%>s:
-    <br>
-     
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML =  hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+    
+  }
+}, 1000);
+</script>
 
   <strong>Question:</strong>&nbsp;
   <%= @question.name %>
@@ -27,4 +44,6 @@
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%end%>
 <%= link_to 'Back', questions_path %>
+
+
 
