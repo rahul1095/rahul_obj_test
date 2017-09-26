@@ -11,14 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
-  </div>
+  </div> -->
 
   <div class="field">
-  </div>
+  <%= f.collection_select :test_id, Test.all, :id, :name, :prompt => 'Select One' %>
 
+  </div>
+  <%Test.all.each do |test|%>
+  <%=link_to "#{test.name}",'/questions/'%>
+  <%end%>
   <div class="actions">
     <%= f.submit %>
   </div>

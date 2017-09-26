@@ -1,6 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+
+
+<% @question.end_time=Time.now+1.hours%>
+
+<%@question.start_time=Time.now%>
+
+   <% distance = @question.end_time-@question.start_time%>
+ 
+  
+   <%hours = distance/(60 * 60)%>
+   <%minutes = (distance / 60)%60%>
+   <%seconds = distance % 60%>
+
+ <%=format("%02d", hours)%>H: <%=format("%02d", minutes)%>m:<%=format("%02d", seconds)%>s:
+    <br>
+     
+
   <strong>Question:</strong>&nbsp;
   <%= @question.name %>
 </p>
